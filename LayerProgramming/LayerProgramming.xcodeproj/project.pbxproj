@@ -13,7 +13,6 @@
 		1714D0E415183C3A003BEEDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1714D0E315183C3A003BEEDC /* main.m */; };
 		1714D0E715184316003BEEDC /* DetailScopeList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1714D0E615184316003BEEDC /* DetailScopeList.m */; };
 		1714D0EA15184334003BEEDC /* ScopeList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1714D0E915184334003BEEDC /* ScopeList.m */; };
-		1714D0F4151861BD003BEEDC /* SLViewList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1714D0F3151861BD003BEEDC /* SLViewList.m */; };
 		1714D0FC15188265003BEEDC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1714D0FB15188264003BEEDC /* QuartzCore.framework */; };
 		17240F551516F4E4003A5214 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17240F541516F4E4003A5214 /* UIKit.framework */; };
 		17240F571516F4E4003A5214 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17240F561516F4E4003A5214 /* Foundation.framework */; };
@@ -21,8 +20,6 @@
 		17240F5B1516F4E4003A5214 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17240F5A1516F4E4003A5214 /* CoreData.framework */; };
 		17240F611516F4E4003A5214 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17240F5F1516F4E4003A5214 /* InfoPlist.strings */; };
 		17851A6115170A16002D2641 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17851A6015170A16002D2641 /* RootViewController.m */; };
-		17B48997152035210043C901 /* SLScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B48996152035210043C901 /* SLScrollView.m */; };
-		17DCD16C152080CA0008193B /* SLPopUpDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DCD16B152080CA0008193B /* SLPopUpDetailView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,8 +34,6 @@
 		1714D0E815184334003BEEDC /* ScopeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScopeList.h; path = CoreDataManager/ScopeList.h; sourceTree = "<group>"; };
 		1714D0E915184334003BEEDC /* ScopeList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScopeList.m; path = CoreDataManager/ScopeList.m; sourceTree = "<group>"; };
 		1714D0ED1518479A003BEEDC /* DefinedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefinedData.h; path = Constants/DefinedData.h; sourceTree = "<group>"; };
-		1714D0F2151861BD003BEEDC /* SLViewList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLViewList.h; path = Views/SLViewList.h; sourceTree = "<group>"; };
-		1714D0F3151861BD003BEEDC /* SLViewList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLViewList.m; path = Views/SLViewList.m; sourceTree = "<group>"; };
 		1714D0F615186455003BEEDC /* skin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = skin.h; path = SkinManager/skin.h; sourceTree = "<group>"; };
 		1714D0FB15188264003BEEDC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		17240F501516F4E4003A5214 /* LayerProgramming.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LayerProgramming.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,12 +42,8 @@
 		17240F581516F4E4003A5214 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		17240F5A1516F4E4003A5214 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		17240F601516F4E4003A5214 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		17851A5F15170A16002D2641 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = Controllers/RootViewController.h; sourceTree = "<group>"; };
 		17851A6015170A16002D2641 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = Controllers/RootViewController.m; sourceTree = "<group>"; };
-		17B48995152035210043C901 /* SLScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLScrollView.h; path = Views/SLScrollView.h; sourceTree = "<group>"; };
-		17B48996152035210043C901 /* SLScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLScrollView.m; path = Views/SLScrollView.m; sourceTree = "<group>"; };
-		17DCD16A152080CA0008193B /* SLPopUpDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLPopUpDetailView.h; path = Views/SLPopUpDetailView.h; sourceTree = "<group>"; };
-		17DCD16B152080CA0008193B /* SLPopUpDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLPopUpDetailView.m; path = Views/SLPopUpDetailView.m; sourceTree = "<group>"; };
+		17AAD86E15EC9CF800739271 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = Controllers/RootViewController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,7 +156,7 @@
 		17851A5D151709BA002D2641 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				17851A5F15170A16002D2641 /* RootViewController.h */,
+				17AAD86E15EC9CF800739271 /* RootViewController.h */,
 				17851A6015170A16002D2641 /* RootViewController.m */,
 			);
 			name = Controllers;
@@ -174,12 +165,6 @@
 		17851A5E151709C8002D2641 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1714D0F2151861BD003BEEDC /* SLViewList.h */,
-				1714D0F3151861BD003BEEDC /* SLViewList.m */,
-				17B48995152035210043C901 /* SLScrollView.h */,
-				17B48996152035210043C901 /* SLScrollView.m */,
-				17DCD16A152080CA0008193B /* SLPopUpDetailView.h */,
-				17DCD16B152080CA0008193B /* SLPopUpDetailView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -252,9 +237,6 @@
 				1714D0E415183C3A003BEEDC /* main.m in Sources */,
 				1714D0E715184316003BEEDC /* DetailScopeList.m in Sources */,
 				1714D0EA15184334003BEEDC /* ScopeList.m in Sources */,
-				1714D0F4151861BD003BEEDC /* SLViewList.m in Sources */,
-				17B48997152035210043C901 /* SLScrollView.m in Sources */,
-				17DCD16C152080CA0008193B /* SLPopUpDetailView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

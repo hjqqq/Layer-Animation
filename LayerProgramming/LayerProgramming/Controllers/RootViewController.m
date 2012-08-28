@@ -7,9 +7,6 @@
 //
 
 #import "RootViewController.h"
-#import "ScopeList.h"
-#import "SLViewList.h"
-#import "SLScrollView.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define SUBLAYER_WIDTH  50
