@@ -20,6 +20,7 @@
 		17240F5B1516F4E4003A5214 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17240F5A1516F4E4003A5214 /* CoreData.framework */; };
 		17240F611516F4E4003A5214 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17240F5F1516F4E4003A5214 /* InfoPlist.strings */; };
 		17851A6115170A16002D2641 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17851A6015170A16002D2641 /* RootViewController.m */; };
+		17AAD87115ECC20800739271 /* LPCubeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AAD87015ECC20800739271 /* LPCubeView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,8 @@
 		17240F601516F4E4003A5214 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		17851A6015170A16002D2641 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = Controllers/RootViewController.m; sourceTree = "<group>"; };
 		17AAD86E15EC9CF800739271 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = Controllers/RootViewController.h; sourceTree = "<group>"; };
+		17AAD86F15ECC20800739271 /* LPCubeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPCubeView.h; path = Views/LPCubeView.h; sourceTree = "<group>"; };
+		17AAD87015ECC20800739271 /* LPCubeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPCubeView.m; path = Views/LPCubeView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +168,8 @@
 		17851A5E151709C8002D2641 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				17AAD86F15ECC20800739271 /* LPCubeView.h */,
+				17AAD87015ECC20800739271 /* LPCubeView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -237,6 +242,7 @@
 				1714D0E415183C3A003BEEDC /* main.m in Sources */,
 				1714D0E715184316003BEEDC /* DetailScopeList.m in Sources */,
 				1714D0EA15184334003BEEDC /* ScopeList.m in Sources */,
+				17AAD87115ECC20800739271 /* LPCubeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

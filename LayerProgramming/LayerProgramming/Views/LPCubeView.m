@@ -1,12 +1,11 @@
 //
-//  RootViewController.m
+//  LPCubeView.m
 //  LayerProgramming
 //
-//  Created by Ymedialabs on 3/19/12.
+//  Created by Mahesh on 8/28/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "RootViewController.h"
 #import "LPCubeView.h"
 
 #define SUBLAYER_WIDTH  50
@@ -19,9 +18,9 @@
 #define FRAME   CGRectMake(0.0f, 0.0f, SQUARE_SIZE, SQUARE_SIZE)
 #define BORDERWIDTH     1.0f
 
-@interface RootViewController ()
+@interface LPCubeView (Private)
 {
-    CALayer *layer;
+
 }
 
 - (CABasicAnimation *)pushAnimation;
@@ -29,151 +28,59 @@
 - (CABasicAnimation *)waveAnimation;
 - (CATransformLayer *)generate3DCubicalTransformLayer;
 
+-(void)postInitialization;
+-(void)preInitialization;
+
 @end
 
-@implementation RootViewController
+@implementation LPCubeView
 
-@synthesize managerContext;
-
-- (id)init{
-    self = [super init];
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
     if (self) {
-        // Custom initialization
-      [[self view]setBackgroundColor:[UIColor grayColor]];
+        // Initialization code
+        [self postInitialization];
     }
     return self;
 }
 
-- (void)didReceiveMemoryWarning
+
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect
 {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+    // Drawing code
+}
+*/
+
+#pragma mark - Pre Initialization Methods
+- (void)preInitialization
+{
+
+}
+
+- (void)postInitialization
+{
+    CATransformLayer *generatedTransformLayer = [self generate3DCubicalTransformLayer];
     
-    // Release any cached data, images, etc that aren't in use.
-}
-
-- (void)dealloc
-{
-  SL_RELEASE_SAFELY(scrollView);
-  [super dealloc];
-}
-
-#pragma mark - View lifecycle
-
-
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-  [super loadView];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-  
-}
-
--(void)storeData
-{
-  //[self insertSprints]; // call when the view has been loaded
-  
-}
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
+    CALayer *generatedlayer = [CALayer layer];
+    [generatedlayer setFrame:CGRectMake(0,0, SQUARE_SIZE, SQUARE_SIZE)];
+    [generatedlayer addSublayer:generatedTransformLayer];
     
-    LPCubeView *cubeView = [[LPCubeView alloc]initWithFrame:CGRectMake(100, 100, 100, 100)];
-    [[self view]addSubview:cubeView];
-    [cubeView release];
-  
-}
+    CABasicAnimation *basicanimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+    [basicanimation setAutoreverses:YES];
+    [basicanimation setFromValue:[NSValue valueWithCATransform3D:CATransform3DMakeRotation(-M_PI, 1, 0, 1)]];
+    [basicanimation setToValue:[NSValue valueWithCATransform3D:CATransform3DMakeRotation(( 2 *M_PI), 1, 0, 1)]];
+    [basicanimation setDuration:3.0f];
+    [basicanimation setRepeatCount:HUGE_VAL];
+    [basicanimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [generatedTransformLayer addAnimation:basicanimation forKey:@"transform"];
+    
+    [[self layer]addSublayer:generatedlayer];
 
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-#pragma mark - CoreData Implementation
-- (void)fetchedResultsManagedObject
-{
-  // the entity
-  NSString *entityName=scope;
-
-  // error
-  NSError *error;
-  
-  // request the entity
-  // Create and configure a fetch request.
-  NSFetchRequest *request = [[NSFetchRequest alloc] init];
-  NSEntityDescription *entity = [NSEntityDescription entityForName:entityName
-                                            inManagedObjectContext:managerContext];
-  [request setEntity:entity];
-  [request setFetchBatchSize:30];
-  //get the data
-  NSArray *fetchedobjects=[managerContext executeFetchRequest:request error:&error];
-  for(NSManagedObject *info in fetchedobjects)
-  {
-    NSLog(@"id %i\n ",[[info valueForKey:SLId]integerValue]);
-  }
-  // sort and filter if you want
-  SL_RELEASE_SAFELY(request);
-}
-
-- (void)insertSprints
-{
-  NSManagedObject *scopeList= [NSEntityDescription insertNewObjectForEntityForName:scope inManagedObjectContext:managerContext];
-  [scopeList setValue:[NSNumber numberWithBool:NO] forKey:SLCodeReview];
-  [scopeList setValue:[NSNumber numberWithBool:NO] forKey:SLDevelopment];
-  [scopeList setValue:[NSNumber numberWithBool:YES] forKey:SLPlanning];
-  [scopeList setValue:[NSNumber numberWithBool:NO] forKey:SLReady];
-  [scopeList setValue:[NSNumber numberWithBool:NO] forKey:SLTesting];
-  [scopeList setValue:[NSNumber numberWithInt:0001] forKey:SLId];
-  
-  NSManagedObject *scopeDetailList=[NSEntityDescription insertNewObjectForEntityForName:detailScope inManagedObjectContext:managerContext];
-  [scopeDetailList setValue:@"gray" forKey:SLDetailColor];
-  [scopeDetailList setValue:[NSDate date] forKey:SLDetailDate];
-  [scopeDetailList setValue:[NSDate date] forKey:SLDetailExpectedEndDate];
-  [scopeDetailList setValue:@"Learn Core Data Basics" forKey:SLDetailDetails];
-  [scopeDetailList setValue:[NSNumber numberWithInt:0001] forKey:SLDetailscopeId];
-  [scopeDetailList setValue:@"Mahesh Shanbhag" forKey:SLDetailpostedBy];
-  
-  NSError *error;
-  if(![managerContext save:&error])
-  {
-    NSLog(@"Error in Saving [-->] %@",[error localizedDescription]);
-  }
-  else
-  {
-    [self fetchedResultsManagedObject];
-  }
-}
-
-#pragma mark - touches detected
-- (BOOL)canBecomeFirstResponder
-{
-  return YES;
-}
-
-#pragma mark - tap Gesture
-- (void)tapPressed:(UIGestureRecognizer *)gesture
-{
-  NSLog(@"view tapped Description %@",[gesture view]);
 }
 
 #pragma mark - Private methods
@@ -224,7 +131,7 @@
     [transformLayer setBounds:CGRectMake(0, 0,100,100)];
     
     CGPoint centralPoint =CGPointMake([transformLayer bounds].size.width/2, [transformLayer bounds].size.height/2); 
-
+    
     // this is the first face of the cube
     CALayer *layer1 = [CALayer layer]; 
     [layer1 setBounds:FRAME];
@@ -243,7 +150,7 @@
     [layerText1 setForegroundColor:[[UIColor whiteColor] CGColor]];
     [layer1 addSublayer:layerText1];
     
-
+    
     
     // this is the second face of the cube
     CALayer *layer2 = [CALayer layer];
@@ -362,7 +269,7 @@
     transform = CATransform3DTranslate(transform, 0,-SQUARE_SIZE/2, 0 );
     transform = CATransform3DTranslate(transform, 0, 0, -SQUARE_SIZE/2);
     layer6.transform = transform;
-
+    
     // adding text to layer 6
     CATextLayer *layerText6 = [CATextLayer layer];
     [layerText6 setFont:@"Helvetica-Bold"];
@@ -384,14 +291,10 @@
     
     // set the anchor point to the center of the transform layer
     [transformLayer setAnchorPointZ:-SQUARE_SIZE/2];
-     
+    
     // return transformlayer
     return transformLayer;
 }
 
-#pragma mark - touch methods
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-}
 
 @end
