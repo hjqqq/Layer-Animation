@@ -21,6 +21,7 @@
 		17240F611516F4E4003A5214 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17240F5F1516F4E4003A5214 /* InfoPlist.strings */; };
 		17851A6115170A16002D2641 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17851A6015170A16002D2641 /* RootViewController.m */; };
 		17AAD87115ECC20800739271 /* LPCubeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AAD87015ECC20800739271 /* LPCubeView.m */; };
+		17AAD8C015ECDC1B00739271 /* LPCircularGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AAD8BF15ECDC1B00739271 /* LPCircularGestureRecognizer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,8 @@
 		17AAD86E15EC9CF800739271 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = Controllers/RootViewController.h; sourceTree = "<group>"; };
 		17AAD86F15ECC20800739271 /* LPCubeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPCubeView.h; path = Views/LPCubeView.h; sourceTree = "<group>"; };
 		17AAD87015ECC20800739271 /* LPCubeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPCubeView.m; path = Views/LPCubeView.m; sourceTree = "<group>"; };
+		17AAD8BE15ECDC1B00739271 /* LPCircularGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPCircularGestureRecognizer.h; path = "Utilities+GestureRecognizers/LPCircularGestureRecognizer.h"; sourceTree = "<group>"; };
+		17AAD8BF15ECDC1B00739271 /* LPCircularGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPCircularGestureRecognizer.m; path = "Utilities+GestureRecognizers/LPCircularGestureRecognizer.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +126,7 @@
 		17240F5C1516F4E4003A5214 /* LayerProgramming */ = {
 			isa = PBXGroup;
 			children = (
+				17AAD8BC15ECDBDA00739271 /* Utilities+Recognizers */,
 				1714D0EC15184735003BEEDC /* Constants */,
 				1714D0EB1518471F003BEEDC /* SkinManager */,
 				1714D0D315183B35003BEEDC /* AppDelegateAndModel */,
@@ -172,6 +176,15 @@
 				17AAD87015ECC20800739271 /* LPCubeView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		17AAD8BC15ECDBDA00739271 /* Utilities+Recognizers */ = {
+			isa = PBXGroup;
+			children = (
+				17AAD8BE15ECDC1B00739271 /* LPCircularGestureRecognizer.h */,
+				17AAD8BF15ECDC1B00739271 /* LPCircularGestureRecognizer.m */,
+			);
+			name = "Utilities+Recognizers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +256,7 @@
 				1714D0E715184316003BEEDC /* DetailScopeList.m in Sources */,
 				1714D0EA15184334003BEEDC /* ScopeList.m in Sources */,
 				17AAD87115ECC20800739271 /* LPCubeView.m in Sources */,
+				17AAD8C015ECDC1B00739271 /* LPCircularGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
