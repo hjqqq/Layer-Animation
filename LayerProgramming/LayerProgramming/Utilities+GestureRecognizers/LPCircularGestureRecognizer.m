@@ -67,6 +67,7 @@
     _startPoint = [[touches anyObject]locationInView:self.view];
     _latestUpdate = [[touches anyObject]timestamp];
     _newPoint = _startPoint;
+    [self setHolePortion:0.5];
     
     // now get the maximun and the minimum radius
     // for a circle to be drawn we need to get the 
@@ -86,7 +87,7 @@
         NSLog(@"Inside Circle Touches Began");
     }
     
-    NSLog(@"Touches Began");
+    NSLog(@"Touches Began ");
     
 }
 
@@ -123,6 +124,7 @@
     // velocity
     CGFloat _newTangentPoint = atan2f(_translateOld.x, _translateOld.y);
     CGFloat _oldTangentPoint = atan2f(_translateNew.x, _translateNew.y);
+    CGFloat _initialTangentPoint = atan2f(_startPoint.x - _circleCenter.x, _startPoint.y - _circleCenter.y);
     
     // Now let us check if the rotation is in the clock wise of the anticlock wise
     // direction
@@ -141,7 +143,7 @@
         
         // check if the rotation is in the positive of the negative direction
         // however we need to convert it to positivce
-        _rotation = _newTangentPoint<_negativeAngle?fabs(_diff) * -1.0f:fabs(_diff);
+        _rotation = _newTangentPoint<_negativeAngle?fabs(_diff):fabs(_diff)*-1.0f;
     }
     else {
         
@@ -157,7 +159,19 @@
         if([self validatePosition:_newPoint])
         {
           // valid point
-            NSLog(@"In the Circle");
+            
+            
+            NSLog(@" In CircleAngles Angle1: %f Angle2: %f\n",fabs((_initialTangentPoint*180.0f)/M_PI),fabs((_newTangentPoint*180)/M_PI));
+            if(((int)(((_initialTangentPoint*180.0f)/M_PI)-10) < (int)((_newTangentPoint*180)/M_PI)))
+            {
+                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"SLP" message:@"Circle Completed" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                [alertView show];
+                [alertView release];
+                
+                 NSLog(@"Tangent point Angle1: %f Angle2: %f\n",(_initialTangentPoint*180.0f)/M_PI,(_newTangentPoint*180)/M_PI);
+                
+                [self resetData];
+            }
             
         }
         else {
@@ -206,7 +220,9 @@
     
     CGFloat _distance = sqrtf(powf(_touchX, 2)+powf(_touchY, 2));
     
-    if(_distance > _maximumRadius && _distance < _minimumRadius)
+    NSLog(@"Validate Touch Point:%f radius: %f minimum radius %f\n Circle Center x: %f Circle Center y: %f\n ",_distance,_minimumRadius ,_maximumRadius,_circleCenter.x,_circleCenter.y);
+    
+    if(_distance < _maximumRadius && _distance > _minimumRadius)
     {
         return true;
     }
