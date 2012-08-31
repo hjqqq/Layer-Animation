@@ -19,6 +19,7 @@
     CGFloat _velocity;
     NSTimeInterval _latestUpdate;
     CGFloat _holePortion;
+    CGFloat _rotation;
 }
 
 - (void)resetData;
@@ -29,6 +30,29 @@
 
 @implementation LPCircularGestureRecognizer
 
+@synthesize view=_view;
+
+
+#pragma mark - Life Cycle
+
+- (id)initWithView:(UIView *)parentView
+{
+    self = [super init];
+    
+    if(self)
+    {
+      // set the parent view to the self.view
+      _view=parentView;   
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    SL_RELEASE_SAFELY(self.view);
+    [super dealloc];
+}
+
 #pragma mark - touch Methods
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -37,7 +61,6 @@
     if([touches count]>1)
     {
         NSLog(@"More than one touch detected");
-        [self cancelsTouchesInView];
     }
     
     // there is only one touch 
@@ -51,26 +74,34 @@
     // so the circle can fit in it and set it to the 
     // maximum radius and 0.3 of the _hole portion to the 
     // holeportion value time the above value
-    _maximumRadius = MIN([self view].frame.size.width, [self view].frame.size.height)/2;
+    _maximumRadius = MIN(_view.frame.size.width, _view.frame.size.height)/2;
     _minimumRadius = _holePortion * _maximumRadius;
     
     // once the radius is obtained get the center of the circle
-    _circleCenter = CGPointMake(CGRectGetMidX([self view].frame), CGRectGetMidY([self view].frame));
+    _circleCenter = CGPointMake(CGRectGetMidX(_view.frame), CGRectGetMidY(_view.frame));
     
     if(![self validatePosition:_startPoint])
     {
         // loggging error that the point is in side the doughnut
+        NSLog(@"Inside Circle Touches Began");
     }
+    
+    NSLog(@"Touches Began");
     
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     
+    NSLog(@"Touches Cancelled");
+    [self resetData];
+    
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    NSLog(@"Touches Ended");
+    [self resetData];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -79,22 +110,59 @@
     UITouch *_touch = [touches anyObject];
     
     // get the previous and new point
-    CGPoint _previousPoint = [_touch previousLocationInView:[self view]];
-    CGPoint _newPoint = [_touch locationInView:[self view]];
+    CGPoint _previousTouchPoint = [_touch previousLocationInView:_view];
+    CGPoint _newTouchPoint = [_touch locationInView:_view];
     
     // here to ge the velocity of the movement, we need the position of the 
     // points with center as the reference.
     
-    CGPoint _translateOld = CGPointMake(_previousPoint.x - _circleCenter.x, _previousPoint.y -_circleCenter.y);
-    CGPoint _translateNew = CGPointMake(_newPoint.x - _circleCenter.x, _newPoint.y - _circleCenter.y);
+    CGPoint _translateOld = CGPointMake(_previousTouchPoint.x - _circleCenter.x, _previousTouchPoint.y -_circleCenter.y);
+    CGPoint _translateNew = CGPointMake(_newTouchPoint.x - _circleCenter.x, _newTouchPoint.y - _circleCenter.y);
     
     // we need to get the angle made by the swipe so that to calculate the 
     // velocity
     CGFloat _newTangentPoint = atan2f(_translateOld.x, _translateOld.y);
     CGFloat _oldTangentPoint = atan2f(_translateNew.x, _translateNew.y);
     
+    // Now let us check if the rotation is in the clock wise of the anticlock wise
+    // direction
     
+    CGFloat _halfCircle = M_PI;
     
+    CGFloat _positiveAngle = M_PI; // the positive half circle
+    CGFloat _negativeAngle = M_PI * -1.0f; // the negative half circle
+    
+    if(((_newTangentPoint < _negativeAngle) && (_oldTangentPoint > _positiveAngle)) || ((_newTangentPoint > _positiveAngle) && (_oldTangentPoint < _negativeAngle)))
+    {
+        // calculate the angle difference
+        CGFloat _firstAngle = _halfCircle - fabs(_newTangentPoint);
+        CGFloat _secondAngle =  _halfCircle -fabs(_oldTangentPoint);
+        CGFloat _diff = _secondAngle - _firstAngle;
+        
+        // check if the rotation is in the positive of the negative direction
+        // however we need to convert it to positivce
+        _rotation = _newTangentPoint<_negativeAngle?fabs(_diff) * -1.0f:fabs(_diff);
+    }
+    else {
+        
+            _rotation = _newTangentPoint - _oldTangentPoint;
+    }
+        
+        NSTimeInterval _timeDifference = _touch.timestamp - _latestUpdate;
+        
+        _velocity = _rotation/_timeDifference;
+        _latestUpdate = _touch.timestamp;
+        
+        
+        if([self validatePosition:_newPoint])
+        {
+          // valid point
+            NSLog(@"In the Circle");
+            
+        }
+        else {
+            NSLog(@"Not in circle");
+        }
     
 }
 
@@ -112,10 +180,6 @@
     
     // if there are any gesture after the circle is complete then 
     // cancel the gesture
-    if(self.state == UIGestureRecognizerStatePossible)
-    {
-        [self cancelsTouchesInView];
-    }
 }
 
 - (void)setHolePortion:(CGFloat)holePortion

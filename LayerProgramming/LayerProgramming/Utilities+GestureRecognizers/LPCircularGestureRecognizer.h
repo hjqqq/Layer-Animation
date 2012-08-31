@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LPCircularGestureRecognizer : UIGestureRecognizer
+@interface LPCircularGestureRecognizer : NSObject
 {
 
 }
 
+@property(nonatomic,retain)UIView *view;
+
+
+- (id)initWithView:(UIView *)parentView;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;

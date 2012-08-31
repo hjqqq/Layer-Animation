@@ -7,6 +7,7 @@
 //
 
 #import "RootViewController.h"
+#import "LPCircularGestureRecognizer.h"
 #import "LPCubeView.h"
 
 #define SUBLAYER_WIDTH  50
@@ -22,6 +23,7 @@
 @interface RootViewController ()
 {
     CALayer *layer;
+    LPCircularGestureRecognizer  *_circularGestureRecognizer;
 }
 
 - (CABasicAnimation *)pushAnimation;
@@ -88,6 +90,8 @@
     [[self view]addSubview:cubeView];
     [cubeView release];
   
+    // init the circular gestureRecognizer;
+    _circularGestureRecognizer = [[LPCircularGestureRecognizer alloc]initWithView:self.view];
 }
 
 
@@ -392,6 +396,22 @@
 #pragma mark - touch methods
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [_circularGestureRecognizer touchesBegan:touches withEvent:event];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [_circularGestureRecognizer touchesCancelled:touches withEvent:event];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [_circularGestureRecognizer touchesEnded:touches withEvent:event];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [_circularGestureRecognizer touchesMoved:touches withEvent:event];
 }
 
 @end
